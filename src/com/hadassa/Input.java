@@ -7,7 +7,7 @@ import java.util.Scanner;
  */
 public class Input {
 
-    private static String my_input[];
+    private static String my_input;
     private static char command ;
 
     /**
@@ -22,9 +22,9 @@ public class Input {
     public void settingString()throws Exception {
         Scanner myObj = new Scanner(System.in);
         System.out.println("Please enter  a command");
-        my_input = myObj.nextLine().split(" ");
-        validatorCommand();
-        command = my_input[0].charAt(0);
+        my_input = myObj.nextLine();
+       // validatorCommand();
+        command = my_input.charAt(0);
     }
 
     /**
@@ -32,21 +32,24 @@ public class Input {
      * @return the suitable class
      * @throws MyExeption if the Type is not allowed
      */
-    public static Command checkValid() throws MyExeption {
-        if (command=='l') {
-            return new Language(my_input[0],my_input[1],my_input[2]);
+    public static Command checkValid() throws Exception{
+        if (command == 'l') {
+            return new Language(my_input);
         }
-        if (command=='i') {
-            return new Image(my_input[0],my_input[1]);
+        if (command == 'i') {
+            return new Image(my_input);
         }
 
-        if (command =='w')
-            return new Word(my_input[0],my_input[1],my_input[2]);
+        if (command == 'w')
+            return new Word(my_input);
 
-        if (command =='t')
-            return new Type(my_input[0],my_input[1],my_input[2]);
+        if (command == 't')
+            return new Type(my_input);
 
-        throw new MyExeption();
+        if(command == 'q')
+            return new quit(my_input);
+
+        throw new MyExeption("invallid command");
     }
 
     /**
@@ -54,15 +57,14 @@ public class Input {
      *  so if it checks if the command is written in uppercase then it will throw an "invalid command" exception
      * @throws Exception if the command is invalid
      */
-    private void validatorCommand() throws Exception{
+  /*  private void validatorCommand() throws Exception{
         if (Character.isUpperCase(my_input[0].charAt(0)) || my_input[0].length() > 1)
             throw new Exception("invallid command");
 
         if ((!(my_input.length == 3)&&(my_input[0].charAt(0)=='w'||my_input[0].charAt(0)=='l'||my_input[0].charAt(0)=='t'))||(!(my_input.length == 2)&&(my_input[0].charAt(0)=='i')))
             throw new IllegalArgumentException("false");
-        if(my_input[0].charAt(0)=='q')
-            throw new MyExitExeption();
-    }
 
+    }
+*/
 
 }

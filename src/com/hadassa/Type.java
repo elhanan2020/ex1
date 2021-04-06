@@ -4,13 +4,14 @@ package com.hadassa;
  *
  */
 public class Type implements Command{
-    private final String command;
+    private final String commande;
     private final String urls;
     private final String content;
-    public Type(String command1,String url1,String content1){
-        command =command1;
-        urls = url1;
-        content= content1;
+    public Type(String commandline)throws Exception{
+        String[] command =validatorCommand(commandline.split(" "));
+        commande = command[0];
+        urls = command[1];
+        content= command[2];
 }
 
     /**
@@ -20,9 +21,16 @@ public class Type implements Command{
      */
 
     public  boolean checkTheValidityCommand()throws  Exception{
-        Url url = new Url(command,urls);
+        Url url = new Url(commande,urls);
         if (url.readUrl().contains(content))
             return true;
         return false;
+    }
+    private String[] validatorCommand(String[] command)throws IllegalArgumentException ,MyExeption{
+        if( command[0].length() > 1 )
+            throw new MyExeption("invallid command");
+        if (!(command.length == 3))
+            throw new IllegalArgumentException("false");
+        return command;
     }
 }

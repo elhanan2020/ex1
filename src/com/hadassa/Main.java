@@ -16,15 +16,14 @@ public class Main {
      */
     public static void main(String[] args) {
         Input theCommand = new Input();
-        boolean Exit = false;
-        while(!Exit) {
+        while(true) {
             try {
                 theCommand.settingString();
                 Command command = theCommand.checkValid();
                 System.out.println(command.checkTheValidityCommand());
             }
             catch (MyExitExeption e) {
-                Exit = true;
+                break;
             }
             catch (MalformedURLException e) {
                 System.err.println("bad url");

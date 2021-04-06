@@ -4,7 +4,8 @@ public class MyExeption extends Exception {
     /**
      * Creates a new UnknownGateException.
      */
-    public MyExeption() {
+    public MyExeption(String err) {
+        super(err);
     }
     /**
      * Creates a new UnknownGateException.

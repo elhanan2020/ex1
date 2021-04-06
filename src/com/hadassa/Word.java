@@ -12,19 +12,21 @@ package com.hadassa;
      * boolean members
      */
     private boolean contain = true;
-    private final String command;
+    String entierString;
+    private final String commande;
     private final String urls;
     private final String content;
     /**
      * the word constructor
-     * @param command1 type of command
-     * @param url1 url to check
-     * @param content1 from what check it
+     *
+     * @param commandline from what check it
      */
-     public Word(String command1,String url1,String content1){
-         command =command1;
-         urls = url1;
-         content= content1;
+     public Word(String commandline)throws Exception{
+         entierString = commandline;
+         String[] command =validatorCommand(commandline.split(" "));
+         commande = command[0];
+         urls = command[1];
+         content= command[2];
     }
 
     /**
@@ -32,16 +34,14 @@ package com.hadassa;
      * @throws Exception if all word of the file are in the text of the html page
      */
     public  boolean checkTheValidityCommand()throws  Exception{
-        Type types = new Type(command,urls,content);
+        Type types = new Type(entierString);
         types.checkTheValidityCommand();
-
-        Url url = new Url(command,urls);
+        Url url = new Url(commande,urls);
         checkTheUrl(url);
         if(contain)
             return true;
         return false;
     }
-
     /**
      *
      * @param url the url to check
@@ -56,6 +56,14 @@ package com.hadassa;
                 contain = false;
                 break;
             }
+    }
+
+    private String[] validatorCommand(String[] command)throws IllegalArgumentException ,MyExeption{
+        if(command[0].length() > 1 )
+            throw new MyExeption("invallid command");
+        if (!(command.length == 3))
+            throw new IllegalArgumentException("false");
+        return command;
     }
 }
 

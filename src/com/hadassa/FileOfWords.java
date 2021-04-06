@@ -27,7 +27,7 @@ public class FileOfWords {
                 lines += line + " ";
             }
             if(lines.isEmpty())
-                throw  new MyExeption();
+                throw  new MyExeption("kjh");
             lines = lines.toLowerCase();
         }
         catch (IOException ioe) {

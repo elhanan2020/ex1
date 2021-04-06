@@ -5,17 +5,18 @@ package com.hadassa;
  * if a  html page given is in english or no
  */
 public class Language implements Command{
-    private final String command;
+    private final String commande;
     private final String urls;
     private final String content;
     private double alphabet [] = new double[26];
     private double totalnum = 0;
     private double varX;
     private double variance=0;
-    public Language(String command1,String url1,String content1){
-        command =command1;
-        urls = url1;
-        content= content1;
+    public Language(String commandline)throws  Exception{
+        String[] command =validatorCommand(commandline.split(" "));
+        commande = command[0];
+        urls = command[1];
+        content= command[2];
         if (!content.equals("english"))
             throw new IllegalArgumentException("false");
     }
@@ -28,7 +29,7 @@ public class Language implements Command{
     public  boolean checkTheValidityCommand()throws  Exception{
         double var [] = {0.0748,0.0134,0.0411,0.0308,0.1282,0.0240,0.0185,0.0414,0.0725,0.0014,0.0053,0.0403,0.0340,
                 0.0673,0.0785,0.0314,0.0010,0.0609,0.0614,0.1002,0.0316,0.0108,0.0131,0.0044,0.0127,0.0011};
-        Url url = new Url(command,urls);
+        Url url = new Url(commande,urls);
         String Webpage = url.getHtmlString().toLowerCase();
 
         sortAlphLetter(Webpage);
@@ -64,5 +65,13 @@ public class Language implements Command{
                 totalnum++;
             }
         }
+    }
+
+    private String[] validatorCommand(String[] command)throws IllegalArgumentException ,MyExeption{
+        if( command[0].length() > 1 )
+            throw new MyExeption("invallid command");
+        if (!(command.length == 3))
+            throw new IllegalArgumentException("false");
+        return command;
     }
 }

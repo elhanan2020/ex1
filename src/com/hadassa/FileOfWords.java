@@ -13,7 +13,7 @@ public class FileOfWords {
     }
 
     public String[] GetTheWord() throws  Exception{
-        String Myword[] = {""};
+        String Myword[] ;
         extractWords();
         Myword = lines.split(" ");
         return Myword;
@@ -26,9 +26,6 @@ public class FileOfWords {
             while ((line = reader.readLine()) != null) {
                 lines += line + " ";
             }
-            if(lines.isEmpty())
-                throw  new MyExeption("kjh");
-            lines = lines.toLowerCase();
         }
         catch (IOException ioe) {
             System.out.println("error");
@@ -40,5 +37,11 @@ public class FileOfWords {
                 throw new IOException();
             }
         }
+
+    }
+    public boolean isEmpty(){
+        if(lines.isEmpty())
+            return true;
+        return false;
     }
 }

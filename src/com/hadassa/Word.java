@@ -11,11 +11,13 @@ package com.hadassa;
     /**
      * boolean members
      */
+    private boolean empty = false ;
     private boolean contain = true;
     String entierString;
     private final String commande;
     private final String urls;
     private final String content;
+
     /**
      * the word constructor
      *
@@ -38,7 +40,7 @@ package com.hadassa;
         types.checkTheValidityCommand();
         Url url = new Url(commande,urls);
         checkTheUrl(url);
-        if(contain)
+        if(contain||empty)
             return true;
         return false;
     }
@@ -50,8 +52,12 @@ package com.hadassa;
     private void checkTheUrl(Url url)throws Exception{
         FileOfWords words = new FileOfWords(content);
         String htmlword = url.getHtmlString();
+        System.out.println(htmlword);
         String fileword[] = words.GetTheWord();
-        for (int i = 0; i < fileword.length ; i++)
+        if(words.isEmpty())
+            empty = true;
+        else
+            for (int i = 0; i < fileword.length ; i++)
             if(!htmlword.contains(fileword[i])) {
                 contain = false;
                 break;

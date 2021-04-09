@@ -7,8 +7,8 @@ import java.util.Scanner;
  */
 public class Input {
 
-    private static String my_input;
-    private static char command ;
+    private static String myInput;
+    private static String[] command ;
 
     /**
      * this contractor dont initialize anythink
@@ -22,9 +22,8 @@ public class Input {
     public void settingString()throws Exception {
         Scanner myObj = new Scanner(System.in);
         System.out.println("Please enter  a command");
-        my_input = myObj.nextLine();
-       // validatorCommand();
-        command = my_input.charAt(0);
+        myInput = myObj.nextLine();
+        command = myInput.split(" ");
     }
 
     /**
@@ -32,22 +31,21 @@ public class Input {
      * @return the suitable class
      * @throws MyExeption if the Type is not allowed
      */
-    public static Command checkValid() throws Exception{
-        if (command == 'l') {
-            return new Language(my_input);
+    public static Command  checkValid() throws Exception{
+        if (command[0].equals("l") ) {
+            return new Language(myInput);
         }
-        if (command == 'i') {
-            return new Image(my_input);
+        if (command[0].equals("i")) {
+            return new Image(myInput);
         }
+        if (command[0].equals("w"))
+            return new Word(myInput);
 
-        if (command == 'w')
-            return new Word(my_input);
+        if (command[0].equals("t"))
+            return new Type(myInput);
 
-        if (command == 't')
-            return new Type(my_input);
-
-        if(command == 'q')
-            return new quit(my_input);
+        if(command[0].equals("q"))
+            return new Quit(myInput);
 
         throw new MyExeption("invallid command");
     }

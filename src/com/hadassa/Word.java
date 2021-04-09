@@ -33,7 +33,8 @@ package com.hadassa;
 
     /**
      * its function that check if all given word is in a given html page
-     * @throws Exception if all word of the file are in the text of the html page
+     * @return if all word of the file are in the text of the html page we return true else we return false
+     * @throws Exception if happen error
      */
     public  boolean checkTheValidityCommand()throws  Exception{
         Type types = new Type(entierString);

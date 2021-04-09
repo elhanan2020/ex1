@@ -1,7 +1,7 @@
 package com.hadassa;
 
 /**
- * this role of this class is to check trow a algorithm to define
+ * the role of this class is to check trow a algorithm to define
  * if a  html page given is in english or no
  */
 public class Language implements Command{
@@ -56,9 +56,11 @@ public class Language implements Command{
     /**
      * function that count how  many times each letter appears
      * @param Webpage string of all word of the html page
+     *                Character.isLetter(Webpage.charAt(i))
      */
     private void sortAlphLetter(String Webpage){
         for (int i = 0; i <Webpage.length() ; i++) {
+
             if(Webpage.charAt(i) > 96 && Webpage.charAt(i) < 123 )
             {
                 alphabet[((int)Webpage.charAt(i))-97]++;

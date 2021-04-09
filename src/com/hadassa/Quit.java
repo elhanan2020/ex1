@@ -1,7 +1,7 @@
 package com.hadassa;
 
-public class quit implements Command {
-    public quit(String commandline)throws MyExeption{
+public class Quit implements Command {
+    public Quit(String commandline)throws MyExeption{
         validatorCommand(commandline.split(" "));
     };
     public void validatorCommand (String[] command)throws MyExeption{

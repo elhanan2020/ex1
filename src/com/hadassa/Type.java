@@ -22,7 +22,7 @@ public class Type implements Command{
 
     public  boolean checkTheValidityCommand()throws  Exception{
         Url url = new Url(commande,urls);
-        if (url.readUrl().contains(content))
+        if (url.readUrl().startsWith(content))
             return true;
         return false;
     }

@@ -12,7 +12,7 @@ public class Url {
     private  String addresse;
     private  String tipe;
     private  Elements imageElement;
-    private  String Stringword;
+    private  String stringWord;
 
     /**
      * our constructor
@@ -55,7 +55,7 @@ public class Url {
                 imageElement = document.select("img");
             }
             if(tipe.equals("w")||tipe.equals("l"))
-                Stringword = document.text();
+                stringWord = document.text();
 
         } catch (IllegalArgumentException e) {
            throw new MalformedURLException();
@@ -74,7 +74,7 @@ public class Url {
      */
     public String getHtmlString()throws MalformedURLException{
         isInto();
-        return Stringword.toLowerCase();
+        return stringWord.toLowerCase();
     }
 
     /**

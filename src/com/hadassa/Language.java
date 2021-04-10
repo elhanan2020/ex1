@@ -36,7 +36,7 @@ public class Language implements Command{
 
         algoEnglish(var);
 
-        if(variance<=0.004)
+        if(variance <= 0.004)
            return true;
 
         return false;
@@ -49,7 +49,7 @@ public class Language implements Command{
     private void algoEnglish(double[] var){
         for (int i = 0; i < alphabet.length; i++) {
             varX = alphabet[i]/totalnum;
-            variance +=(var[i]-varX)*(var[i]-varX);
+            variance +=Math.pow(var[i]-varX,2);
            }
     }
 
@@ -61,7 +61,7 @@ public class Language implements Command{
     private void sortAlphLetter(String Webpage){
         for (int i = 0; i <Webpage.length() ; i++) {
 
-            if(Webpage.charAt(i) > 96 && Webpage.charAt(i) < 123 )
+            if(Webpage.charAt(i) > 'a' && Webpage.charAt(i) < 'z' )
             {
                 alphabet[((int)Webpage.charAt(i))-97]++;
                 totalnum++;

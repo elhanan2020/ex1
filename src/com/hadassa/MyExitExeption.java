@@ -1,15 +1,14 @@
 package com.hadassa;
 
+/**
+ * I used this class exception to catch when the user enter "q" command to exit
+ */
 public class MyExitExeption extends Exception {
     /**
-     * Creates a new UnknownGateException.
+     * not get and no initialize anythings
      */
     public MyExitExeption() {
     }
-    /**
-     * Creates a new UnknownGateException.
-     * @param cause A phrase explaining the cause
-     * for the exception.
-     */
+
 
 }

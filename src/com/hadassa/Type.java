@@ -7,7 +7,7 @@ public class Type implements Command{
     private final String commande;
     private final String urls;
     private final String content;
-    public Type(String commandline)throws Exception{
+    public Type(String commandline)throws MyExeption{
         String[] command =validatorCommand(commandline.split(" "));
         commande = command[0];
         urls = command[1];
@@ -17,20 +17,18 @@ public class Type implements Command{
     /**
      * this function get from the  url instance his content type and check if the contain type of
      * the user match with the contain type of the  given url
-     * @throws Exception if is contained
+     * @throws MyExeption if is contained
      */
 
-    public  boolean checkTheValidityCommand()throws  Exception{
+    public  boolean checkTheValidityCommand()throws  MyExeption{
         Url url = new Url(commande,urls);
-        if (url.readUrl().startsWith(content))
-            return true;
-        return false;
+        return url.readUrl().startsWith(content);
     }
-    private String[] validatorCommand(String[] command)throws IllegalArgumentException ,MyExeption{
+    private String[] validatorCommand(String[] command)throws MyExeption{
         if( command[0].length() > 1 )
-            throw new MyExeption("invallid command");
+            throw new MyExeption("invalid command",true);
         if (!(command.length == 3))
-            throw new IllegalArgumentException("false");
+            throw new MyExeption("false",false);
         return command;
     }
 }

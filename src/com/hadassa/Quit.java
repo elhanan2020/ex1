@@ -5,8 +5,8 @@ public class Quit implements Command {
         validatorCommand(commandline.split(" "));
     };
     public void validatorCommand (String[] command)throws MyExeption{
-        if(command[0].length() > 1 && command.length > 1 )
-            throw new MyExeption ("invallid command");
+        if(command[0].length() > 1 || command.length > 1 )
+            throw new MyExeption ("invalid command",true);
 
     }
     public boolean checkTheValidityCommand()throws MyExitExeption{

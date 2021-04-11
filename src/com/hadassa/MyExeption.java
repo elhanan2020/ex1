@@ -1,16 +1,26 @@
 package com.hadassa;
 
+/**
+ * this exception class is a own exception that i used to concentrate
+ * all exception that i catch over the program and get from then the message i want to print
+ */
 public class MyExeption extends Exception {
-    /**
-     * Creates a new UnknownGateException.
-     */
-    public MyExeption(String err) {
-        super(err);
-    }
-    /**
-     * Creates a new UnknownGateException.
-     * @param cause A phrase explaining the cause
-     * for the exception.
-     */
 
+    private final String mymess;
+    private final boolean kindMess;
+    public MyExeption(String err,boolean kind) {
+        mymess = err;
+        kindMess = kind;
+    }
+
+    /**
+     * this method print to the console
+     * the message i want to chow and in witch color to show it in normal color or in  red color like the standard error
+     */
+    public void printMessage(){
+        if(kindMess)
+            System.err.println(mymess);
+        else
+            System.out.println(mymess);
+    }
 }

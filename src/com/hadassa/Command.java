@@ -5,6 +5,6 @@ package com.hadassa;
  */
 public  interface Command {
 
-     public abstract boolean checkTheValidityCommand()throws  Exception;
+     public abstract boolean checkTheValidityCommand()throws  MyExeption, MyExitExeption;
 
 }

@@ -13,7 +13,7 @@ package com.hadassa;
      */
     private boolean empty = false ;
     private boolean contain = true;
-    String entierString;
+    private final String entierString;
     private final String commande;
     private final String urls;
     private final String content;
@@ -23,7 +23,7 @@ package com.hadassa;
      *
      * @param commandline from what check it
      */
-     public Word(String commandline)throws Exception{
+     public Word(String commandline)throws MyExeption{
          entierString = commandline;
          String[] command =validatorCommand(commandline.split(" "));
          commande = command[0];
@@ -34,42 +34,39 @@ package com.hadassa;
     /**
      * its function that check if all given word is in a given html page
      * @return if all word of the file are in the text of the html page we return true else we return false
-     * @throws Exception if happen error
+     * @throws MyExeption if happen error
      */
-    public  boolean checkTheValidityCommand()throws  Exception{
+    public  boolean checkTheValidityCommand()throws  MyExeption{
         Type types = new Type(entierString);
         types.checkTheValidityCommand();
         Url url = new Url(commande,urls);
         checkTheUrl(url);
-        if(contain||empty)
-            return true;
-        return false;
+        return contain || empty;
     }
     /**
      *
      * @param url the url to check
-     * @throws Exception if all word of the file are in the text of the html page
+     * @throws MyExeption if all word of the file are in the text of the html page
      */
-    private void checkTheUrl(Url url)throws Exception{
+    private void checkTheUrl(Url url)throws MyExeption{
         FileOfWords words = new FileOfWords(content);
-        String htmlword = url.getHtmlString();
-        System.out.println(htmlword);
-        String fileword[] = words.GetTheWord();
+        String htmlWord = url.getHtmlString();
+        String[] fileWord = words.GetTheWord();
         if(words.isEmpty())
             empty = true;
         else
-            for (int i = 0; i < fileword.length ; i++)
-            if(!htmlword.contains(fileword[i])) {
-                contain = false;
-                break;
-            }
+            for (String s : fileWord)
+                if (!htmlWord.contains(s)) {
+                    contain = false;
+                    break;
+                }
     }
 
-    private String[] validatorCommand(String[] command)throws IllegalArgumentException ,MyExeption{
+    private String[] validatorCommand(String[] command)throws MyExeption{
         if(command[0].length() > 1 )
-            throw new MyExeption("invallid command");
+            throw new MyExeption("invalid command",true);
         if (!(command.length == 3))
-            throw new IllegalArgumentException("false");
+            throw new MyExeption("false",false);
         return command;
     }
 }

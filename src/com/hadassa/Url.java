@@ -9,8 +9,8 @@ import java.net.*;
 import java.io.*;
 
 public class Url {
-    private  String addresse;
-    private  String tipe;
+    private  final String addresse;
+    private  final String tipe;
     private  Elements imageElement;
     private  String stringWord;
 
@@ -27,28 +27,31 @@ public class Url {
     /**
      * this function open connection with url and return a ype of this url
      * @return the content type of the given url
-     * @throws Exception in case of troubles to open connection to this url
+     * @throws MyExeption in case of troubles to open connection to this url
      */
-    public String readUrl()throws Exception {
+    public String readUrl()throws MyExeption {
         try {
             URL urlAdress = new URL(addresse);
             URLConnection connection = urlAdress.openConnection();
             String content = connection.getContentType();
             if(content == null)
-                throw new IOException();
+                throw new MyExeption("error",true);
             return content;
         }
         catch (MalformedURLException e){
-            throw new MalformedURLException();
+            throw new MyExeption("bad url",true);
+        }
+        catch (IOException e){
+            throw new MyExeption("error with the url",true);
         }
     }
 
     /**
      * this function use jsoup to open connection with url and for "i" command
      * extract all img tag and for "w" and "l" extract all text
-     * @throws  MalformedURLException if the url is not valid
+     * @throws  MyExeption if the url is not valid
      */
-    private void isInto()throws MalformedURLException {
+    private void isInto()throws MyExeption {
         try {
             Document document = Jsoup.connect(addresse).get();
             if(tipe.equals("i")){
@@ -58,10 +61,10 @@ public class Url {
                 stringWord = document.text();
 
         } catch (IllegalArgumentException e) {
-           throw new MalformedURLException();
+           throw new MyExeption("bad url",true);
         }
         catch (IOException ex) {
-            Logger.getLogger(Word.class.getName()).log(Level.SEVERE, null, ex);
+            throw new MyExeption("error",true);
         }
 
     }
@@ -70,9 +73,9 @@ public class Url {
     /**
      *  this function call to the "isInto" function to extract the html text and return it
      * @return string of all text in the html page
-     * @throws MalformedURLException if the url is not correct
+     * @throws MyExeption if the url is not correct
      */
-    public String getHtmlString()throws MalformedURLException{
+    public String getHtmlString()throws MyExeption{
         isInto();
         return stringWord.toLowerCase();
     }
@@ -80,9 +83,9 @@ public class Url {
     /**
      *this function call to the "isInto" function to get all image tag of  the html code and return it
      * @return all tag element of kind "image" of the html page
-     * @throws MalformedURLException if the url is not vallid
+     * @throws MyExeption if the url is not vallid
      */
-    public Elements getImage()throws MalformedURLException{
+    public Elements getImage()throws MyExeption{
         isInto();
         return imageElement;
     }
